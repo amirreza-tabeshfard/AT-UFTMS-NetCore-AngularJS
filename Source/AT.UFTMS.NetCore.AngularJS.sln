@@ -1,9 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36717.8 d17.14
+VisualStudioVersion = 17.14.36717.8
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.UFTMS.WebAPI.Domain", "AT.UFTMS.WebAPI.Domain\AT.UFTMS.WebAPI.Domain.csproj", "{A35C6ED3-3361-4241-A7B7-8A09BF73B79D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A35C6ED3-3361-4241-A7B7-8A09BF73B79D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A35C6ED3-3361-4241-A7B7-8A09BF73B79D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A35C6ED3-3361-4241-A7B7-8A09BF73B79D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A35C6ED3-3361-4241-A7B7-8A09BF73B79D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
