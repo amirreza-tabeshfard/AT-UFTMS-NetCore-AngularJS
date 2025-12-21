@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.UFTMS.WebAPI.Domain", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.UFTMS.WebAPI.Application", "AT.UFTMS.WebAPI.Application\AT.UFTMS.WebAPI.Application.csproj", "{B12234C1-284E-4E80-8DAE-6773E0A14DDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.UFTMS.WebAPI.Infrastructure", "AT.UFTMS.WebAPI.Infrastructure\AT.UFTMS.WebAPI.Infrastructure.csproj", "{31BAF745-05BC-4EF3-A971-BE17FA6E32AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B12234C1-284E-4E80-8DAE-6773E0A14DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B12234C1-284E-4E80-8DAE-6773E0A14DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B12234C1-284E-4E80-8DAE-6773E0A14DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31BAF745-05BC-4EF3-A971-BE17FA6E32AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31BAF745-05BC-4EF3-A971-BE17FA6E32AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31BAF745-05BC-4EF3-A971-BE17FA6E32AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31BAF745-05BC-4EF3-A971-BE17FA6E32AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
