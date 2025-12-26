@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html ng-app="uftmsApp">
+<head>
+    <meta charset="utf-8" />
+    <title>AT.UFTMS</title>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+    <!-- App -->
+    <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/controllers/home.controller.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>AT.UFTMS System</h1>
+        <hr />
+    </header>
+
+    <!-- View Container -->
+    <div ng-view></div>
+</body>
+</html>

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.UFTMS.WebAPI.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.UFTMS.WebAPI.Api", "AT.UFTMS.WebAPI.Api\AT.UFTMS.WebAPI.Api.csproj", "{BD71F97E-1714-472D-B130-BAE223F478FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AT.UFTMS.WebUI.AngularJS", "AT.UFTMS.WebUI.AngularJS\AT.UFTMS.WebUI.AngularJS.csproj", "{8E0B299A-10C6-4B70-8BF8-D62600925838}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BD71F97E-1714-472D-B130-BAE223F478FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD71F97E-1714-472D-B130-BAE223F478FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD71F97E-1714-472D-B130-BAE223F478FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E0B299A-10C6-4B70-8BF8-D62600925838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E0B299A-10C6-4B70-8BF8-D62600925838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E0B299A-10C6-4B70-8BF8-D62600925838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E0B299A-10C6-4B70-8BF8-D62600925838}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
