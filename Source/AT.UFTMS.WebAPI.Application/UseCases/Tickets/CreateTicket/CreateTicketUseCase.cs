@@ -3,34 +3,18 @@ public class CreateTicketUseCase(Abstractions.Repositories.ITicketRepository tic
                                  Abstractions.Services.ICurrentUserService currentUserService,
                                  CreateTicketValidator validator)
 {
-    #region Field(s)
-    
-    private readonly Abstractions.Repositories.ITicketRepository _ticketRepository = ticketRepository;
-    private readonly Abstractions.Services.ICurrentUserService _currentUserService = currentUserService;
-    private readonly CreateTicketValidator _validator = validator;
-
-    #endregion
-
-    #region Public Method(s)
-    
     public DTOs.Responses.CreateTicketResponseDto Execute(DTOs.Requests.CreateTicketRequestDto request)
     {
-        _validator.Validate(request);
+        validator.Validate(request);
 
-        Domain.Entities.Ticket ticket = new(Guid.NewGuid(),
-                                            request.Title,
-                                            request.Description,
-                                            request.Type,
-                                            request.Priority,
-                                            _currentUserService.UserId);
+        Domain.Entities.Ticket ticket = Domain.Entities.Ticket.Create(request.Title!,
+                                                                      request.Description!,
+                                                                      request.Type,
+                                                                      request.Priority,
+                                                                      currentUserService.UserId);
 
-        _ticketRepository.Add(ticket);
+        ticketRepository.Add(ticket);
 
-        return new DTOs.Responses.CreateTicketResponseDto
-        {
-            TicketId = ticket.Id
-        };
-    } 
-
-    #endregion
+        return new DTOs.Responses.CreateTicketResponseDto(ticket.Id);
+    }
 }

@@ -1,26 +1,36 @@
 ﻿namespace AT.UFTMS.WebAPI.Domain.Entities;
 public class Ticket : Common.Entity
 {
-    #region Constructor
-    
-    public Ticket(Guid id,
-                  string? title,
-                  string? description,
-                  Enums.TicketType type,
-                  Enums.TicketPriority priority,
-                  Guid createdByUserId)
+    #region Constructor (Rehydration)
+
+    [System.Text.Json.Serialization.JsonConstructor]
+    private Ticket(Guid id,
+                   Guid createdByUserId,
+                   string title,
+                   string description,
+                   Enums.TicketType type,
+                   Enums.TicketPriority priority,
+                   Enums.TicketStatus status,
+                   DateTime createdAt)
         : base(id)
     {
-        SetTitle(title);
-        SetDescription(description);
-
+        CreatedByUserId = createdByUserId;
+        Title = title;
+        Description = description;
         Type = type;
         Priority = priority;
-        Status = Enums.TicketStatus.New;
+        Status = status;
+        CreatedAt = createdAt;
+    }
 
-        CreatedByUserId = createdByUserId;
-        CreatedAt = DateTime.UtcNow;
-    } 
+    #endregion
+
+    #region Constructor (Protected - Domain)
+
+    protected Ticket(Guid id) 
+        : base(id)
+    {
+    }
 
     #endregion
 
@@ -28,9 +38,9 @@ public class Ticket : Common.Entity
 
     public Guid CreatedByUserId { get; private set; }
 
-    public string? Title { get; private set; }
+    public string Title { get; private set; } = null!;
 
-    public string? Description { get; private set; }
+    public string Description { get; private set; } = null!;
 
     public Enums.TicketType Type { get; private set; }
 
@@ -42,51 +52,76 @@ public class Ticket : Common.Entity
 
     #endregion
 
-    #region Private Method(s)
+    #region State Pattern (Runtime Behavior)
 
-    private void SetTitle(string? title)
+    private Tickets.States.ITicketState _state = null!;
+
+    private void InitializeState()
     {
-        if (string.IsNullOrWhiteSpace(title))
-            throw new Exceptions.DomainException("Title is required.");
-
-        Title = title;
+        _state = Tickets.States.TicketStateFactory.Create(Status);
     }
 
-    private void SetDescription(string? description)
+    internal void SetState(Tickets.States.ITicketState state)
     {
-        if (string.IsNullOrWhiteSpace(description))
-            throw new Exceptions.DomainException("Description is required.");
-
-        Description = description;
+        _state = state;
+        Status = state.Status;
     }
 
     #endregion
 
-    #region Public Method(s)
-    
+    #region Factory Method (Creation)
+
+    public static Ticket Create(string title,
+                                string description,
+                                Enums.TicketType type,
+                                Enums.TicketPriority priority,
+                                Guid createdByUserId)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+            throw new Exceptions.DomainException("Title is required.");
+
+        if (string.IsNullOrWhiteSpace(description))
+            throw new Exceptions.DomainException("Description is required.");
+
+        Ticket ticket = new(Guid.NewGuid())
+        {
+            Title = title,
+            Description = description,
+            Type = type,
+            Priority = priority,
+            Status = Enums.TicketStatus.New,
+            CreatedByUserId = createdByUserId,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        ticket.InitializeState();
+        return ticket;
+    }
+
+    #endregion
+
+    #region Behavior (State Transitions)
+
     public void StartProgress()
     {
-        if (Status != Enums.TicketStatus.New)
-            throw new Exceptions.DomainException("Only new tickets can be started.");
-
-        Status = Enums.TicketStatus.InProgress;
+        _state.StartProgress(this);
     }
 
     public void Answer()
     {
-        if (Status != Enums.TicketStatus.InProgress)
-            throw new Exceptions.DomainException("Only tickets in progress can be answered.");
-
-        Status = Enums.TicketStatus.Answered;
+        _state.Answer(this);
     }
 
     public void Close()
     {
-        if (Status == Enums.TicketStatus.Closed)
-            throw new Exceptions.DomainException("Ticket is already closed.");
+        _state.Close(this);
+    }
 
-        Status = Enums.TicketStatus.Closed;
-    } 
+    public void Close(Guid closedByUserId)
+    {
+        _state.Close(this);
+        AddDomainEvent(new Events.TicketClosedDomainEvent(Id, closedByUserId));
+    }
 
     #endregion
 }

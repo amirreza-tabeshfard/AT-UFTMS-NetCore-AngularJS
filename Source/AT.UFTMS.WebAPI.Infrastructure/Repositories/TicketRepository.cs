@@ -55,16 +55,21 @@ public class TicketRepository(Persistence.Serialization.ISerializer serializer,
         _fileStorage.Save(path, serializedTicket);
     }
 
+    void Application.Abstractions.Repositories.ITicketRepository.Update(Domain.Entities.Ticket ticket)
+    {
+        string path = BuildTicketPath(ticket.Id);
+        string serializedTicket = _serializer.Serialize(ticket);
+        _fileStorage.Save(path, serializedTicket);
+    }
+
     #endregion
 
     #region Private Method(s)
-    
+
     private string BuildTicketPath(Guid ticketId)
     {
-        return Path.Combine(
-            _options.BasePath,
-            $"{ticketId}.ticket");
-    } 
+        return Path.Combine(_options.BasePath, $"{ticketId}.ticket");
+    }
 
     #endregion
 }

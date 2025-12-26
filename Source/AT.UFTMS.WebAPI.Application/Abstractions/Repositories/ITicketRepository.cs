@@ -6,4 +6,6 @@ public interface ITicketRepository
     IReadOnlyList<Domain.Entities.Ticket> GetByUserId(Guid userId);
 
     void Add(Domain.Entities.Ticket ticket);
+
+    void Update(Domain.Entities.Ticket ticket);
 }

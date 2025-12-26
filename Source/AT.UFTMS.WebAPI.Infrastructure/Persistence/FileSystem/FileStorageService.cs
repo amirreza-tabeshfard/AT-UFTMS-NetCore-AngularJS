@@ -6,7 +6,10 @@ public class FileStorageService
     public void Save(string path, string content)
     {
         string directory = Path.GetDirectoryName(path)!;
-        Directory.CreateDirectory(directory);
+
+        if (!Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+
         File.WriteAllText(path, content);
     }
 

@@ -1,21 +1,21 @@
-﻿using AT.UFTMS.WebAPI.Application.Abstractions.Repositories;
-using AT.UFTMS.WebAPI.Infrastructure.Configuration;
-using AT.UFTMS.WebAPI.Infrastructure.Persistence.FileSystem;
-using AT.UFTMS.WebAPI.Infrastructure.Persistence.Serialization;
-using AT.UFTMS.WebAPI.Infrastructure.Repositories;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace AT.UFTMS.WebAPI.Infrastructure.DependencyInjection;
 public static class InfrastructureServiceRegistration
 {
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddSingleton<FileStorageOptions>();
-        services.AddSingleton<FileStorageService>();
+        services.AddSingleton<Configuration.FileStorageOptions>();
+        
+        services.AddSingleton<Persistence.FileSystem.FileStorageService>();
+        services.AddSingleton<Persistence.Serialization.ISerializer, Persistence.Serialization.JsonSerializerAdapter>();
 
-        services.AddSingleton<ISerializer, JsonSerializerAdapter>();
-        services.AddScoped<ITicketRepository, TicketRepository>();
+        services.AddScoped<Application.Abstractions.Repositories.ITicketRepository, Repositories.TicketRepository>();
+        services.AddScoped<Application.Common.IDomainEventDispatcher, DomainEvents.DomainEventDispatcher>();
+
+        services.AddScoped<Application.Queries.Tickets.ITicketReadRepository, Queries.Tickets.FileTicketReadRepository>();
+
+        services.AddScoped<Application.Queries.Tickets.GetMyTickets.GetMyTicketsQuery>();
 
         return services;
     }

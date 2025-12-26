@@ -3,7 +3,11 @@ public class FileStorageOptions
 {
     public FileStorageOptions()
     {
-        BasePath = "Storage/Tickets";
+        BasePath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Storage",
+            "Tickets"
+        );
     }
 
     public string BasePath { get; set; }

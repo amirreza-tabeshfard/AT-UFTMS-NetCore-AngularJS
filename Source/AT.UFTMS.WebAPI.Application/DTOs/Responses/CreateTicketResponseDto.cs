@@ -1,5 +1,5 @@
 ﻿namespace AT.UFTMS.WebAPI.Application.DTOs.Responses;
-public class CreateTicketResponseDto
+public sealed class CreateTicketResponseDto(Guid ticketId)
 {
-    public Guid TicketId { get; set; }
+    public Guid TicketId { get; } = ticketId;
 }
