@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "AT.UFTMS.WebAPI.Api\\AT.UFTMS.WebAPI.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "AT.UFTMS.WebUI.AngularJS\\AT.UFTMS.WebUI.AngularJS.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

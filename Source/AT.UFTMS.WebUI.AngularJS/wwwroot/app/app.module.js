@@ -1,6 +1,4 @@
 ﻿(function () {
-    "use strict";
-
-    angular.module("uftmsApp", ["ngRoute"]);
-
+    'use strict';
+    angular.module('uftmsApp', ['ngRoute']);
 })();

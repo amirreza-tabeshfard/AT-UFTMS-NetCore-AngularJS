@@ -63,6 +63,18 @@ builder.Services.AddAuthentication(options =>
 
 #endregion
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 // ==================================================================================================
 // Build
 // ==================================================================================================
@@ -81,6 +93,8 @@ if (app.Environment.IsDevelopment())
 #region Middleware (HTTP Pipeline)
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
